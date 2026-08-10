@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ORG_LEGAL_NAME, ORG_TAGLINE } from "@/lib/constants";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <p className="sr-only">{ORG_LEGAL_NAME}</p>
+        <SpeedInsights />
       </body>
     </html>
   );
