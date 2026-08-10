@@ -1,17 +1,15 @@
 // AVENUE JAM data model
 //
-// Local development uses SQLite (zero-install, file-based) so the app runs
-// without any external services. For staging/production, switch the
-// datasource below to `provider = "postgresql"` and point `url` at a
-// managed Postgres instance (e.g. `env("DATABASE_URL")` with a postgres://
-// connection string) — the schema itself is Postgres-compatible as written.
+// Running on Neon (managed Postgres). DATABASE_URL is set locally in .env
+// (gitignored, never committed) and in Vercel's Environment Variables for
+// production — both point at the same Neon database for this project.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
