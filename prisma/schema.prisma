@@ -1,0 +1,143 @@
+// AVENUE JAM data model
+//
+// Local development uses SQLite (zero-install, file-based) so the app runs
+// without any external services. For staging/production, switch the
+// datasource below to `provider = "postgresql"` and point `url` at a
+// managed Postgres instance (e.g. `env("DATABASE_URL")` with a postgres://
+// connection string) — the schema itself is Postgres-compatible as written.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum ChapterStatus {
+  ACTIVE
+  PENDING
+  INACTIVE
+}
+
+enum ApplicationStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  DECLINED
+}
+
+enum EventScope {
+  NATIONAL
+  REGIONAL
+  CHAPTER
+}
+
+model Chapter {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  name          String
+  schoolOrOrg   String
+  city          String
+  state         String
+  region        String
+  status        ChapterStatus @default(PENDING)
+  president     String
+  officers      String // JSON-encoded array of { name, role }
+  advisor       String
+  advisorEmail  String
+  foundedYear   Int?
+  summary       String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  events        Event[]
+}
+
+model ChapterApplication {
+  id                  String            @id @default(cuid())
+  applicantName       String
+  email               String
+  schoolOrOrganization String
+  city                String
+  state               String
+  proposedChapterName String
+  motivation          String
+  leadershipExperience String
+  advisorName         String
+  advisorEmail        String
+  advisorPhone        String?
+  fileUploads         String? // JSON-encoded array of stored file paths
+  status              ApplicationStatus @default(SUBMITTED)
+  createdAt           DateTime          @default(now())
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  category    String // "News" | "Announcement" | "Press Release" | "Success Story"
+  excerpt     String
+  body        String
+  coverImage  String?
+  publishedAt DateTime @default(now())
+}
+
+model Event {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  scope       EventScope
+  startsAt    DateTime
+  endsAt      DateTime?
+  location    String
+  description String
+  registerUrl String?
+  chapterId   String?
+  chapter     Chapter?   @relation(fields: [chapterId], references: [id])
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model VolunteerApplication {
+  id           String   @id @default(cuid())
+  name         String
+  email        String
+  phone        String?
+  location     String
+  interests    String
+  availability String
+  experience   String?
+  createdAt    DateTime @default(now())
+}
+
+model PartnershipRequest {
+  id             String   @id @default(cuid())
+  organizationName String
+  contactName    String
+  email          String
+  phone          String?
+  partnershipType String
+  message        String
+  createdAt      DateTime @default(now())
+}
+
+model SpeakerRequest {
+  id            String   @id @default(cuid())
+  requesterName String
+  email         String
+  organization  String
+  eventDate     DateTime
+  eventFormat   String
+  topic         String
+  audience      String
+  message       String?
+  createdAt     DateTime @default(now())
+}

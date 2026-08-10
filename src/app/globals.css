@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #101828;
+
+  /* Brand: navy blue scale */
+  --color-navy-950: #050b1a;
+  --color-navy-900: #0a1630;
+  --color-navy-800: #0f2049;
+  --color-navy-700: #163166;
+  --color-navy-600: #1e4083;
+  --color-navy-500: #2954a3;
+  --color-navy-400: #4d74bd;
+  --color-navy-100: #dbe4f4;
+  --color-navy-50: #f1f5fc;
+
+  /* Neutral scale */
+  --color-neutral-900: #101828;
+  --color-neutral-700: #344054;
+  --color-neutral-500: #667085;
+  --color-neutral-300: #d0d5dd;
+  --color-neutral-200: #e4e7ec;
+  --color-neutral-100: #f2f4f7;
+  --color-neutral-50: #f9fafb;
+
+  /* Muted gold accent, used sparingly for CTA emphasis */
+  --color-gold-600: #9a7317;
+  --color-gold-500: #b3891f;
+  --color-gold-100: #f5ecd6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-navy-600: var(--color-navy-600);
+  --color-navy-500: var(--color-navy-500);
+  --color-navy-400: var(--color-navy-400);
+  --color-navy-100: var(--color-navy-100);
+  --color-navy-50: var(--color-navy-50);
+
+  --color-neutral-900: var(--color-neutral-900);
+  --color-neutral-700: var(--color-neutral-700);
+  --color-neutral-500: var(--color-neutral-500);
+  --color-neutral-300: var(--color-neutral-300);
+  --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-100: var(--color-neutral-100);
+  --color-neutral-50: var(--color-neutral-50);
+
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-100: var(--color-gold-100);
+
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+.prose-page h2 {
+  color: var(--color-navy-900);
+}
