@@ -50,19 +50,19 @@ export default async function ChapterProfilePage({
             <SectionHeading eyebrow="Chapter Leadership" title="Officers & Advisor" />
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div className="rounded-xl border border-neutral-200 p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-navy-600">President</p>
-                <p className="mt-1 font-medium text-navy-950">{chapter.president}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">President</p>
+                <p className="mt-1 font-medium text-brand-950">{chapter.president}</p>
               </div>
               <div className="rounded-xl border border-neutral-200 p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-navy-600">Advisor</p>
-                <p className="mt-1 font-medium text-navy-950">{chapter.advisor}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">Advisor</p>
+                <p className="mt-1 font-medium text-brand-950">{chapter.advisor}</p>
               </div>
               {officers.map((officer) => (
                 <div key={officer.name} className="rounded-xl border border-neutral-200 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-navy-600">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">
                     {officer.role}
                   </p>
-                  <p className="mt-1 font-medium text-navy-950">{officer.name}</p>
+                  <p className="mt-1 font-medium text-brand-950">{officer.name}</p>
                 </div>
               ))}
             </div>
@@ -73,12 +73,12 @@ export default async function ChapterProfilePage({
                 <div className="mt-6 space-y-4">
                   {chapter.events.map((event) => (
                     <div key={event.id} className="rounded-xl border border-neutral-200 p-5">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-navy-600">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">
                         {new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(
                           event.startsAt,
                         )}
                       </p>
-                      <h3 className="mt-1 font-semibold text-navy-950">{event.title}</h3>
+                      <h3 className="mt-1 font-semibold text-brand-950">{event.title}</h3>
                       <p className="mt-1 text-sm text-neutral-600">{event.location}</p>
                       <p className="mt-2 text-sm leading-relaxed text-neutral-600">
                         {event.description}
@@ -90,34 +90,34 @@ export default async function ChapterProfilePage({
             )}
           </div>
 
-          <aside className="rounded-2xl bg-navy-50 p-6">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-navy-600">
+          <aside className="rounded-2xl bg-brand-50 p-6">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-600">
               Chapter Details
             </h3>
             <dl className="mt-4 space-y-3 text-sm">
               <div>
-                <dt className="text-neutral-500">School / Organization</dt>
-                <dd className="font-medium text-navy-900">{chapter.schoolOrOrg}</dd>
+                <dt className="text-neutral-500">School</dt>
+                <dd className="font-medium text-brand-900">{chapter.schoolOrOrg}</dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Location</dt>
-                <dd className="font-medium text-navy-900">
+                <dd className="font-medium text-brand-900">
                   {chapter.city}, {chapter.state}
                 </dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Region</dt>
-                <dd className="font-medium text-navy-900">{chapter.region}</dd>
+                <dd className="font-medium text-brand-900">{chapter.region}</dd>
               </div>
               {chapter.foundedYear && (
                 <div>
                   <dt className="text-neutral-500">Founded</dt>
-                  <dd className="font-medium text-navy-900">{chapter.foundedYear}</dd>
+                  <dd className="font-medium text-brand-900">{chapter.foundedYear}</dd>
                 </div>
               )}
               <div>
                 <dt className="text-neutral-500">Status</dt>
-                <dd className="font-medium text-navy-900">{STATUS_LABEL[chapter.status]}</dd>
+                <dd className="font-medium text-brand-900">{STATUS_LABEL[chapter.status]}</dd>
               </div>
             </dl>
           </aside>

@@ -5,14 +5,14 @@ type Variant = "primary" | "secondary" | "outline" | "ghost" | "onDark" | "onDar
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-600 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-navy-800 text-white hover:bg-navy-900",
-  secondary: "bg-gold-600 text-white hover:bg-gold-500",
-  outline: "border border-navy-800 text-navy-900 hover:bg-navy-50",
-  ghost: "text-navy-900 hover:bg-navy-50",
-  onDark: "bg-white text-navy-900 hover:bg-navy-50",
+  primary: "bg-brand-400 text-brand-950 hover:bg-brand-500",
+  secondary: "bg-brand-600 text-white hover:bg-brand-500",
+  outline: "border border-brand-800 text-brand-900 hover:bg-brand-50",
+  ghost: "text-brand-900 hover:bg-brand-50",
+  onDark: "bg-white text-brand-900 hover:bg-brand-50",
   onDarkOutline: "border border-white/30 text-white hover:bg-white/10",
 };
 

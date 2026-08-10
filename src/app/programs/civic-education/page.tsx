@@ -14,25 +14,26 @@ export default function CivicEducationPage() {
       description="Building a working understanding of how government functions and how to participate in civic life."
       overview={
         <p>
-          Civic Education is the foundation of AVENUE JAM&apos;s programming. Chapters run
-          workshops, simulations, and discussions that help students understand how local, state,
-          and federal government actually work — and how ordinary people engage with it, from
-          voting to public comment to running for office.
+          Civic Education is part of AVENUE JAM&apos;s national educational framework. Chapters
+          create space for students to explore how government functions and how ordinary people
+          engage with it — not through lectures, but through peer-based discussion, questions, and
+          debate. The topics and activities below describe what the program is built to deliver as
+          chapters launch, not a record of activity already happening everywhere.
         </p>
       }
       topics={[
-        { title: "How Government Works", body: "The structure and function of local, state, and federal government." },
-        { title: "Elections & Voting", body: "How elections work and why civic participation matters at every level." },
-        { title: "Civic Participation", body: "Public comment, town halls, petitions, and other tools for civic engagement." },
-        { title: "Media & Information Literacy", body: "Evaluating sources and understanding the role of a free press." },
-        { title: "Local Government in Action", body: "How city councils, school boards, and local agencies make decisions." },
-        { title: "Constitutional Foundations", body: "Core principles of the U.S. constitutional system, taught nonpartisanly." },
+        { title: "How Government Institutions Work", body: "The structure and function of government institutions at every level." },
+        { title: "Federal, State, and Local Government", body: "How responsibilities and authority are divided across levels of government." },
+        { title: "Civic Participation and Public Engagement", body: "The tools ordinary people use to engage with public life and institutions." },
+        { title: "Elections and Democratic Processes", body: "How elections and democratic processes work." },
+        { title: "Public Policy and Community Decision-Making", body: "How public policy gets made and how communities weigh in." },
+        { title: "Rights and Responsibilities", body: "The rights and responsibilities of citizens and residents." },
       ]}
       activities={[
-        "Student-run mock legislature and committee simulations",
-        "Visits from local elected officials and civic leaders",
-        "Voter registration and civic participation drives (for eligible students)",
-        "Town-hall style discussions on local community issues",
+        "Peer-based civic discussions",
+        "Occasional guest speakers",
+        "Educational events and forums",
+        "Student-led exploration of civic and public-policy topics",
       ]}
     />
   );

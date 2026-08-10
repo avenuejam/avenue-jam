@@ -1,27 +1,58 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/Section";
 import { DonateEmbed } from "@/components/DonateEmbed";
+import { DONATIONS_LIVE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Donate",
-  description: "Support AVENUE JAM's civic education, human rights, legal literacy, and youth leadership programs.",
+  description: "Support AVENUE JAM's civic education, human rights, and legal rights literacy programs.",
 };
 
 const impactTiers = [
-  { amount: "$25", body: "Provides a Know Your Rights guide to a full classroom." },
-  { amount: "$100", body: "Funds officer training materials for one new chapter." },
-  { amount: "$500", body: "Sponsors a chapter's annual programming budget for a semester." },
-  { amount: "$2,500", body: "Sends a chapter delegation to the National Youth Leadership Summit." },
+  { amount: "$25", title: "Help Provide Educational Resources", body: "Supports the development and distribution of civic and rights-literacy educational materials." },
+  { amount: "$100", title: "Support Student Programming", body: "Helps support educational programming and resources for students and chapters." },
+  { amount: "$500", title: "Support Chapter Development", body: "Helps provide resources, training, and program support for youth-led chapter activities." },
+  { amount: "$2,500", title: "Expand National Youth Leadership", body: "Helps support larger-scale organizational initiatives, leadership development, curriculum work, and national programming." },
 ];
 
-export default function DonatePage() {
+function DonateComingSoon() {
   return (
     <>
       <PageHero
         eyebrow="Support Our Mission"
         title="Donate to AVENUE JAM"
-        description="Your gift — one-time or monthly — funds free civic education, legal rights literacy, human rights education, and youth leadership programming for students nationwide."
+        description="Online giving isn't open yet — we're finishing setup on our donation platform."
+      />
+      <Section>
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="text-2xl font-bold text-brand-950">Coming Soon</h2>
+          <p className="mt-4 text-lg leading-relaxed text-neutral-600">
+            We&apos;re finalizing our secure donation platform. In the meantime, if you&apos;d
+            like to support AVENUE JAM, please{" "}
+            <Link href="/contact" className="font-semibold text-brand-700 hover:underline">
+              get in touch
+            </Link>
+            .
+          </p>
+        </div>
+      </Section>
+    </>
+  );
+}
+
+export default function DonatePage() {
+  if (!DONATIONS_LIVE) {
+    return <DonateComingSoon />;
+  }
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Support Our Mission"
+        title="Donate to AVENUE JAM"
+        description="Your gift — one-time or monthly — funds free civic education, legal rights literacy, and human rights education for students nationwide."
       />
 
       <Section tone="neutral">
@@ -29,11 +60,16 @@ export default function DonatePage() {
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {impactTiers.map((tier) => (
             <div key={tier.amount} className="rounded-xl bg-white p-6 text-center">
-              <p className="text-2xl font-bold text-navy-900">{tier.amount}</p>
+              <p className="text-2xl font-bold text-brand-900">{tier.amount}</p>
+              <p className="mt-1 text-sm font-semibold text-brand-800">{tier.title}</p>
               <p className="mt-2 text-sm leading-relaxed text-neutral-600">{tier.body}</p>
             </div>
           ))}
         </div>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-neutral-500">
+          These are illustrative examples of how gifts at each level may be used, not audited
+          statements that a specific dollar amount purchases a specific item or service.
+        </p>
       </Section>
 
       <Section>

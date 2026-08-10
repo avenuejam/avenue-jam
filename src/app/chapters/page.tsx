@@ -18,7 +18,7 @@ export default async function ChaptersPage() {
       <PageHero
         eyebrow="Chapter Network"
         title="Chapter Directory"
-        description="AVENUE JAM chapters operate in schools and communities nationwide, each led by student officers under national standards and guidance."
+        description="AVENUE JAM chapters operate school by school nationwide, each led by student officers under national standards and guidance."
       >
         <div className="mt-8">
           <Button href="/chapters/start" variant="secondary" size="lg">

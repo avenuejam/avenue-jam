@@ -28,10 +28,10 @@ export default async function NewsPage() {
               href={`/news/${article.slug}`}
               className="flex flex-col rounded-xl border border-neutral-200 bg-white p-6 hover:shadow-md"
             >
-              <p className="text-xs font-semibold uppercase tracking-wide text-gold-600">
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">
                 {article.category}
               </p>
-              <h2 className="mt-2 font-semibold text-navy-950">{article.title}</h2>
+              <h2 className="mt-2 font-semibold text-brand-950">{article.title}</h2>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-600 line-clamp-3">
                 {article.excerpt}
               </p>

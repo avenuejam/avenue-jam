@@ -76,14 +76,40 @@ only**. Not yet built:
   review queue, website content management, reports)
 - National Resource Library (permissioned document library with
   categories/tags/search)
-- Internal employee & leadership directory (the public `/about/leadership`
+- Internal employee & leadership directory (the public `/about/directory`
   page is a simplified, public-safe version of this)
 - Chapter application **approval workflow UI** (applications already save to
   the database with a `SUBMITTED` status — an admin view to review/approve/
   decline them is the next piece to build)
-- Event registration and calendar management (events currently display
-  read-only sample data)
-- News CMS (articles currently come from seed data, not an editable admin UI)
+- Event registration and calendar management
+- News CMS (an editable admin UI for publishing articles)
+
+## Real content vs. sample data
+
+Mission copy, the legal footer disclaimer, contact info (email/phone/Instagram),
+partner logos (Amnesty International, Virtutem Populo, City of Miami, Gulliver
+Prep), the Executive Director/Executive Board names and org structure
+(Geographic Leadership, Special Districts, NCOD), the brand color (`#4F8756`,
+see `src/app/globals.css`), and the seal logo (`public/brand/`) are all pulled
+from the real avenuejam.com and real assets — not placeholders.
+
+**Chapters, news, and events are intentionally empty**, not sample data —
+AVENUE JAM hasn't chartered a chapter or published either yet. Every page
+that lists them (homepage, `/chapters`, `/news`, `/events`) has a real empty
+state instead of placeholder content. `prisma/seed.ts` documents the exact
+record shape for each; uncomment and fill one in (or insert directly into the
+database) once real chapters, news, or events exist — no other code changes
+needed.
+
+Still placeholder/sample:
+- Chapter directory entries, news articles, and events (`prisma/seed.ts`) —
+  fictional examples showing the data model works, not real chapters.
+- Leadership headshots — real photos exist on avenuejam.com's Google Site but
+  are protected by Google's image server and couldn't be downloaded
+  automatically. The Leadership page shows initials-avatar placeholders until
+  real photos are supplied (drop them in `public/team/` and wire them into
+  `src/app/about/leadership/page.tsx`'s `LeaderCard` calls).
+- Zeffy donation embed — no real Zeffy form exists yet; see "Donations" above.
 
 ## Known limitation to address before going live
 

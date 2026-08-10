@@ -141,3 +141,13 @@ model SpeakerRequest {
   message       String?
   createdAt     DateTime @default(now())
 }
+
+model InterviewRequest {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  position      String
+  location      String?
+  experience    String
+  createdAt     DateTime @default(now())
+}

@@ -16,9 +16,9 @@ const SCOPE_LABEL: Record<string, string> = {
 };
 
 const SCOPE_CLASS: Record<string, string> = {
-  NATIONAL: "bg-navy-900 text-white",
-  REGIONAL: "bg-navy-100 text-navy-800",
-  CHAPTER: "bg-gold-100 text-gold-600",
+  NATIONAL: "bg-brand-900 text-white",
+  REGIONAL: "bg-brand-100 text-brand-800",
+  CHAPTER: "bg-brand-100 text-brand-600",
 };
 
 export default async function EventsPage() {
@@ -47,26 +47,26 @@ export default async function EventsPage() {
                   {event.chapter && (
                     <Link
                       href={`/chapters/${event.chapter.slug}`}
-                      className="text-xs font-medium text-navy-600 hover:underline"
+                      className="text-xs font-medium text-brand-600 hover:underline"
                     >
                       {event.chapter.name}
                     </Link>
                   )}
                 </div>
-                <h2 className="mt-2 text-lg font-semibold text-navy-950">{event.title}</h2>
+                <h2 className="mt-2 text-lg font-semibold text-brand-950">{event.title}</h2>
                 <p className="mt-1 text-sm text-neutral-600">{event.location}</p>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-600">
                   {event.description}
                 </p>
               </div>
               <div className="shrink-0 text-left sm:text-right">
-                <p className="text-sm font-semibold text-navy-900">
+                <p className="text-sm font-semibold text-brand-900">
                   {new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(event.startsAt)}
                 </p>
                 {event.registerUrl && (
                   <a
                     href={event.registerUrl}
-                    className="mt-2 inline-block rounded-md bg-navy-800 px-4 py-2 text-sm font-semibold text-white hover:bg-navy-900"
+                    className="mt-2 inline-block rounded-md bg-brand-800 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-900"
                   >
                     Register
                   </a>

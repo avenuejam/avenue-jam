@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { Chapter } from "@prisma/client";
+import { Button } from "./Button";
 
 const STATUS_LABEL: Record<Chapter["status"], string> = {
   ACTIVE: "Active",
@@ -37,6 +38,21 @@ export function ChapterDirectory({ chapters }: { chapters: Chapter[] }) {
     return matchesRegion && matchesQuery;
   });
 
+  if (chapters.length === 0) {
+    return (
+      <div className="rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-12 text-center">
+        <h3 className="text-lg font-semibold text-brand-950">No chapters have been chartered yet</h3>
+        <p className="mx-auto mt-2 max-w-md text-sm text-neutral-600">
+          AVENUE JAM&apos;s chapter application process is open. Once the first chapters are
+          approved, they&apos;ll appear here.
+        </p>
+        <Button href="/chapters/start" className="mt-6">
+          Start the First Chapter
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -45,13 +61,13 @@ export function ChapterDirectory({ chapters }: { chapters: Chapter[] }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by chapter, school, or city..."
-          className="w-full rounded-md border border-neutral-300 px-4 py-2.5 text-sm focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-100 sm:max-w-sm"
+          className="w-full rounded-md border border-neutral-300 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 sm:max-w-sm"
           aria-label="Search chapters"
         />
         <select
           value={region}
           onChange={(e) => setRegion(e.target.value)}
-          className="rounded-md border border-neutral-300 px-4 py-2.5 text-sm focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-100"
+          className="rounded-md border border-neutral-300 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
           aria-label="Filter by region"
         >
           {regions.map((r) => (
@@ -73,7 +89,7 @@ export function ChapterDirectory({ chapters }: { chapters: Chapter[] }) {
             className="flex flex-col rounded-xl border border-neutral-200 bg-white p-6 hover:shadow-md"
           >
             <div className="flex items-start justify-between gap-3">
-              <h3 className="font-semibold text-navy-950">{chapter.name}</h3>
+              <h3 className="font-semibold text-brand-950">{chapter.name}</h3>
               <span
                 className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${STATUS_CLASS[chapter.status]}`}
               >

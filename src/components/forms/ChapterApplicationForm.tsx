@@ -24,11 +24,11 @@ function Field({
   placeholder?: string;
 }) {
   const inputClasses =
-    "mt-1.5 w-full rounded-md border border-neutral-300 px-3.5 py-2.5 text-sm focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-100";
+    "mt-1.5 w-full rounded-md border border-neutral-300 px-3.5 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100";
   return (
     <div>
       <label htmlFor={name} className="text-sm font-medium text-neutral-800">
-        {label} {required && <span className="text-gold-600">*</span>}
+        {label} {required && <span className="text-brand-600">*</span>}
       </label>
       {textarea ? (
         <textarea
@@ -78,7 +78,7 @@ export function ChapterApplicationForm() {
         <Field label="Applicant Name" name="applicantName" error={state.fieldErrors?.applicantName} />
         <Field label="Email" name="email" type="email" error={state.fieldErrors?.email} />
         <Field
-          label="School / Organization"
+          label="School"
           name="schoolOrOrganization"
           error={state.fieldErrors?.schoolOrOrganization}
         />
@@ -104,7 +104,7 @@ export function ChapterApplicationForm() {
       />
 
       <div className="rounded-lg border border-neutral-200 p-5">
-        <h3 className="font-semibold text-navy-950">Advisor Information</h3>
+        <h3 className="font-semibold text-brand-950">Advisor Information</h3>
         <p className="mt-1 text-sm text-neutral-500">
           Every AVENUE JAM chapter must have a faculty or community advisor.
         </p>
@@ -129,7 +129,7 @@ export function ChapterApplicationForm() {
           type="file"
           multiple
           accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-          className="mt-2 block w-full text-sm text-neutral-600 file:mr-4 file:rounded-md file:border-0 file:bg-navy-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-navy-800 hover:file:bg-navy-100"
+          className="mt-2 block w-full text-sm text-neutral-600 file:mr-4 file:rounded-md file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-800 hover:file:bg-brand-100"
         />
       </div>
 

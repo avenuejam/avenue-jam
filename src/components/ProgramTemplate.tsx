@@ -33,7 +33,7 @@ export function ProgramTemplate({
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {topics.map((topic) => (
             <div key={topic.title} className="rounded-xl border border-neutral-200 bg-white p-6">
-              <h3 className="font-semibold text-navy-950">{topic.title}</h3>
+              <h3 className="font-semibold text-brand-950">{topic.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-neutral-600">{topic.body}</p>
             </div>
           ))}
@@ -47,14 +47,14 @@ export function ProgramTemplate({
             <ul className="mt-6 space-y-3 text-neutral-700">
               {activities.map((activity) => (
                 <li key={activity} className="flex items-start gap-2.5">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-navy-700" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-700" />
                   <span>{activity}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl bg-navy-50 p-8">
-            <h3 className="text-lg font-semibold text-navy-950">Program resources</h3>
+          <div className="rounded-2xl bg-brand-50 p-8">
+            <h3 className="text-lg font-semibold text-brand-950">Program resources</h3>
             <p className="mt-3 text-sm leading-relaxed text-neutral-600">
               Chapter officers and educators can access lesson plans, facilitation guides, and
               activity templates for this program area in the National Resource Library after

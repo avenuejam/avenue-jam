@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/Section";
 import { ProgramCard } from "@/components/ProgramCard";
-import { CivicIcon, HumanRightsIcon, LegalIcon, LeadershipIcon } from "@/components/icons";
+import { CivicIcon, HumanRightsIcon, LegalIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Explore AVENUE JAM's four national program areas: Civic Education, Human Rights Education, Legal Rights Literacy, and Youth Leadership.",
+    "Explore AVENUE JAM's three national curriculum units: Civic Education, Human Rights Education, and Legal Rights Literacy.",
 };
 
 export default function ProgramsPage() {
@@ -16,11 +16,11 @@ export default function ProgramsPage() {
       <PageHero
         eyebrow="What We Do"
         title="Our Programs"
-        description="Every AVENUE JAM chapter builds local programming around four national focus areas — each grounded in accessible, nonpartisan curriculum."
+        description="Every AVENUE JAM chapter builds its work around three national curriculum units — each grounded in accessible, nonpartisan education."
       />
       <Section>
-        <SectionHeading title="Explore our program areas" />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <SectionHeading title="Explore our curriculum" />
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
           <ProgramCard
             icon={<CivicIcon />}
             title="Civic Education"
@@ -38,12 +38,6 @@ export default function ProgramsPage() {
             title="Legal Rights Literacy"
             description="Understanding legal systems, rights, responsibilities, and access to justice."
             href="/programs/legal-rights-literacy"
-          />
-          <ProgramCard
-            icon={<LeadershipIcon />}
-            title="Youth Leadership"
-            description="Developing student leaders through mentorship and hands-on practice."
-            href="/programs/youth-leadership"
           />
         </div>
       </Section>

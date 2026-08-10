@@ -11,28 +11,35 @@ export default function LegalRightsLiteracyPage() {
     <ProgramTemplate
       eyebrow="Program Area"
       title="Legal Rights Literacy"
-      description="Helping students understand the legal system, their rights and responsibilities, and how to access justice."
+      description="Helping students understand their legal rights and responsibilities, and where to go for reliable information."
       overview={
-        <p>
-          Legal Rights Literacy demystifies the legal system for students, many of whom will
-          encounter it directly — as tenants, employees, or simply as members of the public.
-          Chapters teach students their basic rights, how the justice system works, and where to
-          turn for help, in plain, nonpartisan language.
-        </p>
+        <>
+          <p>
+            Legal Rights Literacy is part of AVENUE JAM&apos;s national educational framework.
+            Chapters create space for students to explore legal rights and responsibilities through
+            peer-based discussion, in plain, nonpartisan language. The topics and activities below
+            describe what the program is built to deliver as chapters launch, not a record of
+            activity already happening everywhere.
+          </p>
+          <p className="text-base text-neutral-500">
+            These activities are educational in nature and should not be represented as the
+            provision of legal services or legal representation.
+          </p>
+        </>
       }
       topics={[
-        { title: "How the Legal System Works", body: "Courts, legal processes, and the basics of civil and criminal law." },
-        { title: "Know Your Rights", body: "Rights related to school, employment, housing, and interactions with law enforcement." },
-        { title: "Responsibilities Under the Law", body: "Understanding legal responsibilities alongside legal rights." },
-        { title: "Access to Justice", body: "Legal aid resources and how to find help when rights are violated." },
-        { title: "Contracts & Consumer Basics", body: "Practical legal literacy for everyday agreements and consumer protections." },
-        { title: "Youth & the Law", body: "Legal rights and protections specific to minors and young adults." },
+        { title: "Basic Constitutional Rights", body: "The foundational rights established by the Constitution." },
+        { title: "Rights During Interactions with Government Institutions", body: "What to know when interacting with government institutions." },
+        { title: "Understanding Laws and Legal Systems", body: "How laws and legal systems function." },
+        { title: "Legal Responsibilities and Civic Obligations", body: "Legal responsibilities that come alongside legal rights." },
+        { title: "Accessing Reliable Legal Information and Assistance", body: "Where to find legitimate legal information and assistance." },
+        { title: "Recognizing When Professional Legal Help Is Needed", body: "How to recognize when a situation calls for a qualified professional." },
       ]}
       activities={[
-        "Free community \"Know Your Rights\" clinics",
-        "Mock trial and moot court exercises",
-        "Guest sessions with legal aid attorneys and public defenders",
-        "Plain-language rights guides created by chapter members",
+        "Peer-based legal rights discussions",
+        "Occasional qualified guest speakers",
+        "Educational rights-literacy events",
+        "Discussions of real-world legal and civic scenarios",
       ]}
     />
   );

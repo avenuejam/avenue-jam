@@ -43,7 +43,7 @@ export default async function NewsArticlePage({
               <p key={i}>{paragraph}</p>
             ))}
           </div>
-          <Link href="/news" className="mt-10 inline-block text-sm font-semibold text-navy-700 hover:underline">
+          <Link href="/news" className="mt-10 inline-block text-sm font-semibold text-brand-700 hover:underline">
             &larr; Back to News
           </Link>
         </div>

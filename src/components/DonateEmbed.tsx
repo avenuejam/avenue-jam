@@ -10,8 +10,8 @@ export function DonateEmbed({ title = "Support AVENUE JAM" }: { title?: string }
 
   if (!isConfigured) {
     return (
-      <div className="flex min-h-[420px] flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-navy-200 bg-navy-50 p-8 text-center">
-        <p className="text-sm font-semibold uppercase tracking-wide text-navy-600">
+      <div className="flex min-h-[420px] flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-brand-200 bg-brand-50 p-8 text-center">
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">
           Zeffy Donation Form
         </p>
         <p className="max-w-sm text-sm text-neutral-600">
