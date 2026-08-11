@@ -67,21 +67,21 @@ first account. The portal overview page greets whoever's signed in by name
 and role, with a time-of-day "Good morning/afternoon/evening" header
 (`src/components/admin/PortalGreeting.tsx`).
 
-Roles are modeled per the original org hierarchy (`UserRole` in
-`prisma/schema.prisma`), split into three portal-access tiers in
-`src/lib/auth.ts`:
+`UserRole` (`prisma/schema.prisma`) intentionally holds **only** the five
+roles eligible for this national portal — every other role in the org's
+structure (regional and chapter leadership, see "Planned dashboards" below)
+has no portal of its own yet and isn't in the enum. The five split into
+three access tiers in `src/lib/auth.ts`:
 
-- **`ADMIN_ROLES`** — National Administrator, Executive Director, National
-  Staff, Regional Director, Executive Board Member. Can use Applications,
-  Submissions, and all content sections.
+- **`ADMIN_ROLES`** — National Administrator, Executive Director, Executive
+  Board Member, Director of National Central Operations. Can use
+  Applications, Submissions, and all content sections.
 - **`CONTENT_ROLES`** (`ADMIN_ROLES` plus Communications Officer) — can
   create/edit Chapters, News, and Events (the public-facing content), but
   can't reach Applications, Submissions, or Users. This is the broadest
   tier that can reach `/admin` at all — it's the layout-level gate.
 - **`USER_MANAGEMENT_ROLES`** — National Administrator and Executive
   Director only, for creating/deactivating staff accounts at `/admin/users`.
-- Chapter Officer, Member, Educator/Advisor — exist in the schema for a
-  future chapter/member portal, no portal access yet.
 
 What's in the portal:
 
@@ -103,6 +103,34 @@ Server Actions re-check the session (`requirePortalSession()` /
 `requireAdminSession()` / `requireUserManagementSession()` in
 `src/lib/auth.ts`) independently of the
 layout guard, since actions can be invoked directly.
+
+### Planned dashboards (not built yet)
+
+Two more role groups exist in the org but don't have portal access or a
+dashboard of their own yet. Building either is a separate `UserRole`
+addition plus a new gated route tree (following the `/admin` pattern above)
+— do this once the corresponding dashboard is actually being built, not
+before.
+
+**Regional leadership** — no dashboard scoped yet:
+- Special Regional Coordinator
+- State Lead
+
+**Chapter leadership** — needs its own per-chapter-scoped dashboard (a
+member of this group should only see/manage their own chapter, unlike the
+national portal):
+- **Chapter President** — Overall chapter leader; represents the chapter and
+  oversees operations.
+- **Vice President** — Supports the President and coordinates chapter
+  operations/programming.
+- **Secretary** — Records meetings, maintains chapter records, handles
+  administrative documentation.
+- **Treasurer** — Handles chapter finances, fundraising records, budgets,
+  and financial reporting.
+- **Programs & Curriculum Officer** — Leads educational programming,
+  curriculum implementation, and events.
+- **Recruitment & Outreach Officer** — Handles member recruitment,
+  school/community outreach, partnerships, and chapter promotion.
 
 ## Donations
 

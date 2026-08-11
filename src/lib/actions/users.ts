@@ -9,10 +9,9 @@ import { requireUserManagementSession } from "@/lib/auth";
 const PORTAL_ELIGIBLE_ROLES = [
   "NATIONAL_ADMINISTRATOR",
   "EXECUTIVE_DIRECTOR",
-  "NATIONAL_STAFF",
-  "REGIONAL_DIRECTOR",
   "EXECUTIVE_BOARD_MEMBER",
   "COMMUNICATIONS_OFFICER",
+  "DIRECTOR_OF_NATIONAL_CENTRAL_OPERATIONS",
 ] as const;
 
 const schema = z.object({

@@ -32,16 +32,17 @@ enum EventScope {
   CHAPTER
 }
 
+// The only roles eligible for the national /admin portal. Two more role
+// groups exist in the org (Special Regional Coordinator/State Lead, and
+// chapter leadership: President/VP/Secretary/Treasurer/Programs & Curriculum
+// Officer/Recruitment & Outreach Officer) but don't have a portal of their
+// own yet — see README.md for the planned dashboards.
 enum UserRole {
   NATIONAL_ADMINISTRATOR
   EXECUTIVE_DIRECTOR
-  NATIONAL_STAFF
-  REGIONAL_DIRECTOR
-  EXECUTIVE_BOARD_MEMBER // portal access scoped to content (Chapters/News/Events) only
+  EXECUTIVE_BOARD_MEMBER
   COMMUNICATIONS_OFFICER // portal access scoped to content (Chapters/News/Events) only
-  CHAPTER_OFFICER // not portal-eligible yet — reserved for a future chapter portal
-  MEMBER // not portal-eligible yet
-  EDUCATOR_ADVISOR // not portal-eligible yet
+  DIRECTOR_OF_NATIONAL_CENTRAL_OPERATIONS
 }
 
 model User {

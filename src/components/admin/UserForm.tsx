@@ -8,12 +8,11 @@ import { Button } from "@/components/Button";
 const initialState: UserFormState = { status: "idle" };
 
 const ROLE_OPTIONS = [
-  { value: "NATIONAL_ADMINISTRATOR", label: "National Administrator" },
   { value: "EXECUTIVE_DIRECTOR", label: "Executive Director" },
-  { value: "NATIONAL_STAFF", label: "National Staff" },
-  { value: "REGIONAL_DIRECTOR", label: "Regional Director" },
+  { value: "NATIONAL_ADMINISTRATOR", label: "National Administrator" },
   { value: "EXECUTIVE_BOARD_MEMBER", label: "Executive Board Member" },
-  { value: "COMMUNICATIONS_OFFICER", label: "Communications Officer (Chapters/News/Events only)" },
+  { value: "COMMUNICATIONS_OFFICER", label: "Communications Officer (Chapters/News/Events Only)" },
+  { value: "DIRECTOR_OF_NATIONAL_CENTRAL_OPERATIONS", label: "Director of National Central Operations" },
 ];
 
 export function UserForm() {
