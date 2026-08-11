@@ -18,6 +18,10 @@ export function getChapterBySlug(slug: string) {
   });
 }
 
+export function getChapterById(id: string) {
+  return prisma.chapter.findUnique({ where: { id } });
+}
+
 export function parseOfficers(officers: string): { name: string; role: string }[] {
   try {
     return JSON.parse(officers);

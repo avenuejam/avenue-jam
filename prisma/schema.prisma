@@ -32,6 +32,30 @@ enum EventScope {
   CHAPTER
 }
 
+enum UserRole {
+  NATIONAL_ADMINISTRATOR
+  EXECUTIVE_DIRECTOR
+  NATIONAL_STAFF
+  REGIONAL_DIRECTOR
+  EXECUTIVE_BOARD_MEMBER // portal access scoped to content (Chapters/News/Events) only
+  COMMUNICATIONS_OFFICER // portal access scoped to content (Chapters/News/Events) only
+  CHAPTER_OFFICER // not portal-eligible yet — reserved for a future chapter portal
+  MEMBER // not portal-eligible yet
+  EDUCATOR_ADVISOR // not portal-eligible yet
+}
+
+model User {
+  id                   String               @id @default(cuid())
+  name                 String
+  email                String               @unique
+  passwordHash         String
+  role                 UserRole
+  active               Boolean              @default(true)
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  reviewedApplications ChapterApplication[]
+}
+
 model Chapter {
   id            String        @id @default(cuid())
   slug          String        @unique
@@ -67,6 +91,10 @@ model ChapterApplication {
   advisorPhone        String?
   fileUploads         String? // JSON-encoded array of stored file paths
   status              ApplicationStatus @default(SUBMITTED)
+  reviewNote          String?
+  reviewedAt          DateTime?
+  reviewedById        String?
+  reviewedBy          User?             @relation(fields: [reviewedById], references: [id])
   createdAt           DateTime          @default(now())
 }
 

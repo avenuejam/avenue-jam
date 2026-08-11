@@ -15,3 +15,7 @@ export function getAllEvents() {
     include: { chapter: true },
   });
 }
+
+export function getEventById(id: string) {
+  return prisma.event.findUnique({ where: { id } });
+}

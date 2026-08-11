@@ -7,6 +7,7 @@ export function FormField({
   required = true,
   placeholder,
   options,
+  defaultValue,
 }: {
   label: string;
   name: string;
@@ -16,6 +17,7 @@ export function FormField({
   required?: boolean;
   placeholder?: string;
   options?: string[];
+  defaultValue?: string;
 }) {
   const inputClasses =
     "mt-1.5 w-full rounded-md border border-neutral-300 px-3.5 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -26,9 +28,17 @@ export function FormField({
         {label} {required && <span className="text-brand-600">*</span>}
       </label>
       {textarea ? (
-        <textarea id={name} name={name} required={required} rows={4} placeholder={placeholder} className={inputClasses} />
+        <textarea
+          id={name}
+          name={name}
+          required={required}
+          rows={4}
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          className={inputClasses}
+        />
       ) : options ? (
-        <select id={name} name={name} required={required} className={inputClasses} defaultValue="">
+        <select id={name} name={name} required={required} className={inputClasses} defaultValue={defaultValue ?? ""}>
           <option value="" disabled>
             Select an option
           </option>
@@ -39,7 +49,15 @@ export function FormField({
           ))}
         </select>
       ) : (
-        <input id={name} name={name} type={type} required={required} placeholder={placeholder} className={inputClasses} />
+        <input
+          id={name}
+          name={name}
+          type={type}
+          required={required}
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          className={inputClasses}
+        />
       )}
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>

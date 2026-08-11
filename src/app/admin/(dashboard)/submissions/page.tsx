@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { prisma } from "@/lib/prisma";
+import { Table } from "@/components/admin/Table";
+import { AdminSection } from "@/components/admin/AdminSection";
 
-export const metadata: Metadata = {
-  title: "Admin",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = { title: "Form Submissions" };
 
 export const dynamic = "force-dynamic";
 
@@ -13,84 +11,17 @@ function formatDate(date: Date) {
   return new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeStyle: "short" }).format(date);
 }
 
-function Table({
-  columns,
-  rows,
-}: {
-  columns: { key: string; label: string }[];
-  rows: Record<string, string>[];
-}) {
-  if (rows.length === 0) {
-    return <p className="py-6 text-sm text-neutral-500">No submissions yet.</p>;
-  }
-  return (
-    <div className="overflow-x-auto rounded-lg border border-neutral-200">
-      <table className="w-full min-w-[640px] text-left text-sm">
-        <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500">
-          <tr>
-            {columns.map((col) => (
-              <th key={col.key} className="px-4 py-2.5 font-semibold">
-                {col.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-neutral-100">
-          {rows.map((row, i) => (
-            <tr key={i} className="align-top">
-              {columns.map((col) => (
-                <td key={col.key} className="max-w-xs px-4 py-3 text-neutral-700">
-                  {row[col.key]}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function Section({
-  id,
-  title,
-  count,
-  children,
-}: {
-  id: string;
-  title: string;
-  count: number;
-  children: ReactNode;
-}) {
-  return (
-    <section id={id} className="scroll-mt-20 border-b border-neutral-200 py-10">
-      <h2 className="text-xl font-bold text-neutral-900">
-        {title} <span className="font-normal text-neutral-400">({count})</span>
-      </h2>
-      <div className="mt-4">{children}</div>
-    </section>
-  );
-}
-
-export default async function AdminPage() {
-  const [
-    chapterApplications,
-    contactSubmissions,
-    volunteerApplications,
-    partnershipRequests,
-    speakerRequests,
-    interviewRequests,
-  ] = await Promise.all([
-    prisma.chapterApplication.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.contactSubmission.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.volunteerApplication.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.partnershipRequest.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.speakerRequest.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.interviewRequest.findMany({ orderBy: { createdAt: "desc" } }),
-  ]);
+export default async function SubmissionsPage() {
+  const [contactSubmissions, volunteerApplications, partnershipRequests, speakerRequests, interviewRequests] =
+    await Promise.all([
+      prisma.contactSubmission.findMany({ orderBy: { createdAt: "desc" } }),
+      prisma.volunteerApplication.findMany({ orderBy: { createdAt: "desc" } }),
+      prisma.partnershipRequest.findMany({ orderBy: { createdAt: "desc" } }),
+      prisma.speakerRequest.findMany({ orderBy: { createdAt: "desc" } }),
+      prisma.interviewRequest.findMany({ orderBy: { createdAt: "desc" } }),
+    ]);
 
   const sections = [
-    { id: "chapter-applications", label: "Chapter Applications", count: chapterApplications.length },
     { id: "contact", label: "Contact", count: contactSubmissions.length },
     { id: "volunteer", label: "Volunteer", count: volunteerApplications.length },
     { id: "partnership", label: "Partnership", count: partnershipRequests.length },
@@ -102,7 +33,11 @@ export default async function AdminPage() {
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
       <h1 className="text-2xl font-bold text-neutral-900">Form Submissions</h1>
       <p className="mt-1 text-sm text-neutral-500">
-        Internal only — not linked from the public site. Bookmark this page.
+        Read-only. Chapter applications have their own review workflow under{" "}
+        <a href="/admin/applications" className="text-brand-700 hover:underline">
+          Applications
+        </a>
+        .
       </p>
 
       <nav className="mt-6 flex flex-wrap gap-2 border-b border-neutral-200 pb-6">
@@ -117,32 +52,7 @@ export default async function AdminPage() {
         ))}
       </nav>
 
-      <Section id="chapter-applications" title="Chapter Applications" count={chapterApplications.length}>
-        <Table
-          columns={[
-            { key: "createdAt", label: "Submitted" },
-            { key: "applicantName", label: "Applicant" },
-            { key: "email", label: "Email" },
-            { key: "proposedChapterName", label: "Proposed Chapter" },
-            { key: "schoolOrOrganization", label: "School" },
-            { key: "location", label: "Location" },
-            { key: "status", label: "Status" },
-            { key: "advisor", label: "Advisor" },
-          ]}
-          rows={chapterApplications.map((a) => ({
-            createdAt: formatDate(a.createdAt),
-            applicantName: a.applicantName,
-            email: a.email,
-            proposedChapterName: a.proposedChapterName,
-            schoolOrOrganization: a.schoolOrOrganization,
-            location: `${a.city}, ${a.state}`,
-            status: a.status,
-            advisor: `${a.advisorName} (${a.advisorEmail})`,
-          }))}
-        />
-      </Section>
-
-      <Section id="contact" title="Contact" count={contactSubmissions.length}>
+      <AdminSection id="contact" title="Contact" count={contactSubmissions.length}>
         <Table
           columns={[
             { key: "createdAt", label: "Submitted" },
@@ -159,9 +69,9 @@ export default async function AdminPage() {
             message: c.message,
           }))}
         />
-      </Section>
+      </AdminSection>
 
-      <Section id="volunteer" title="Volunteer Applications" count={volunteerApplications.length}>
+      <AdminSection id="volunteer" title="Volunteer Applications" count={volunteerApplications.length}>
         <Table
           columns={[
             { key: "createdAt", label: "Submitted" },
@@ -180,9 +90,9 @@ export default async function AdminPage() {
             availability: v.availability,
           }))}
         />
-      </Section>
+      </AdminSection>
 
-      <Section id="partnership" title="Partnership Requests" count={partnershipRequests.length}>
+      <AdminSection id="partnership" title="Partnership Requests" count={partnershipRequests.length}>
         <Table
           columns={[
             { key: "createdAt", label: "Submitted" },
@@ -201,9 +111,9 @@ export default async function AdminPage() {
             message: p.message,
           }))}
         />
-      </Section>
+      </AdminSection>
 
-      <Section id="speaker" title="Speaker Requests" count={speakerRequests.length}>
+      <AdminSection id="speaker" title="Speaker Requests" count={speakerRequests.length}>
         <Table
           columns={[
             { key: "createdAt", label: "Submitted" },
@@ -222,9 +132,9 @@ export default async function AdminPage() {
             topic: s.topic,
           }))}
         />
-      </Section>
+      </AdminSection>
 
-      <Section id="interview" title="Interview Requests" count={interviewRequests.length}>
+      <AdminSection id="interview" title="Interview Requests" count={interviewRequests.length}>
         <Table
           columns={[
             { key: "createdAt", label: "Submitted" },
@@ -243,7 +153,7 @@ export default async function AdminPage() {
             experience: i.experience,
           }))}
         />
-      </Section>
+      </AdminSection>
     </div>
   );
 }

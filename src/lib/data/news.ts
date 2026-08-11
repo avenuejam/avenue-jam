@@ -14,3 +14,7 @@ export function getAllNews() {
 export function getNewsBySlug(slug: string) {
   return prisma.newsArticle.findUnique({ where: { slug } });
 }
+
+export function getNewsById(id: string) {
+  return prisma.newsArticle.findUnique({ where: { id } });
+}

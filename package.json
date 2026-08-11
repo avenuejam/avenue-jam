@@ -9,6 +9,7 @@
     "lint": "eslint",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "db:seed-admin": "tsx prisma/seed-admin.ts",
     "db:studio": "prisma studio",
     "postinstall": "prisma generate"
   },
@@ -17,7 +18,9 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
+    "bcryptjs": "^3.0.3",
     "next": "16.3.0",
+    "next-auth": "^5.0.0-beta.32",
     "prisma": "^6.19.3",
     "react": "19.2.8",
     "react-dom": "19.2.8",
