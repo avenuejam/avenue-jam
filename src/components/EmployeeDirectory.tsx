@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { PEOPLE } from "@/lib/constants";
 
 function initials(name: string) {
@@ -62,9 +63,19 @@ export function EmployeeDirectory() {
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((person) => (
           <div key={person.name} className="rounded-xl border border-neutral-200 bg-white p-6">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-800 text-lg font-semibold text-white">
-              {initials(person.name)}
-            </div>
+            {person.photo ? (
+              <Image
+                src={person.photo}
+                alt={person.name}
+                width={56}
+                height={56}
+                className="h-14 w-14 rounded-full object-cover"
+              />
+            ) : (
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-800 text-lg font-semibold text-white">
+                {initials(person.name)}
+              </div>
+            )}
             <h3 className="mt-4 font-semibold text-brand-950">{person.name}</h3>
             <p className="text-sm font-medium text-brand-600">{person.role}</p>
             <p className="mt-1 text-xs uppercase tracking-wide text-neutral-400">

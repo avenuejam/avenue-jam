@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/Section";
@@ -17,12 +18,22 @@ function initials(name: string) {
     .slice(0, 2);
 }
 
-function LeaderCard({ name, role }: { name: string; role: string }) {
+function LeaderCard({ name, role, photo }: { name: string; role: string; photo?: string }) {
   return (
     <div className="rounded-xl border border-neutral-200 bg-white p-6">
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-800 text-lg font-semibold text-white">
-        {initials(name)}
-      </div>
+      {photo ? (
+        <Image
+          src={photo}
+          alt={name}
+          width={56}
+          height={56}
+          className="h-14 w-14 rounded-full object-cover"
+        />
+      ) : (
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-800 text-lg font-semibold text-white">
+          {initials(name)}
+        </div>
+      )}
       <h3 className="mt-4 font-semibold text-brand-950">{name}</h3>
       <p className="text-sm font-medium text-brand-600">{role}</p>
     </div>
@@ -49,7 +60,11 @@ export default function LeadershipPage() {
           </Link>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <LeaderCard name={executiveDirector.name} role={executiveDirector.role} />
+          <LeaderCard
+            name={executiveDirector.name}
+            role={executiveDirector.role}
+            photo={executiveDirector.photo}
+          />
         </div>
       </Section>
 
@@ -57,7 +72,7 @@ export default function LeadershipPage() {
         <SectionHeading eyebrow="Governance" title="Office of the National Executive Board" />
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {executiveBoard.map((m) => (
-            <LeaderCard key={m.name} name={m.name} role={m.role} />
+            <LeaderCard key={m.name} name={m.name} role={m.role} photo={m.photo} />
           ))}
         </div>
         <p className="mt-6 text-sm text-neutral-500">

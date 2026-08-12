@@ -29,6 +29,7 @@ export const PEOPLE: {
   department: string;
   explanation: string;
   bio?: string;
+  photo?: string;
 }[] = [
   {
     name: "Haïm Marrache",
@@ -36,6 +37,7 @@ export const PEOPLE: {
     department: "Office of the Executive Director",
     explanation:
       "Leads AVENUE JAM's national organization, strategic direction, and executive operations.",
+    photo: "/team/haim-marrache.jpg",
   },
   {
     name: "Maurits Acosta",
@@ -43,6 +45,7 @@ export const PEOPLE: {
     department: "Office of the National Executive Board",
     explanation:
       "Provides senior advisory support and guidance to the organization's leadership.",
+    photo: "/team/maurits-acosta.jpg",
   },
   {
     name: "Alita Eagleman",
@@ -50,6 +53,7 @@ export const PEOPLE: {
     department: "Office of the National Executive Board",
     explanation:
       "Serves in her designated national executive leadership capacity within AVENUE JAM.",
+    photo: "/team/alita-eagleman.jpg",
   },
   {
     name: "Charani Vejandla",
@@ -57,6 +61,7 @@ export const PEOPLE: {
     department: "Office of the National Executive Board",
     explanation:
       "Serves in her designated national executive leadership capacity within AVENUE JAM, representing the State of Texas within the national organizational structure and contributing to the National Executive Board.",
+    photo: "/team/charani-vejandla.jpg",
   },
   {
     name: "Gretchen Fletcher",
@@ -64,6 +69,7 @@ export const PEOPLE: {
     department: "Office of the National Executive Board",
     explanation:
       "Serves on the Executive Board and acts as a responsible adult representative for organizational banking and 501(c)(3) representation.",
+    photo: "/team/gretchen-fletcher.jpg",
   },
 ];
 

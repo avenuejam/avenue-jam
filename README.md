@@ -176,12 +176,13 @@ needed.
 Still placeholder/sample:
 - Chapter directory entries, news articles, and events (`prisma/seed.ts`) —
   fictional examples showing the data model works, not real chapters.
-- Leadership headshots — real photos exist on avenuejam.com's Google Site but
-  are protected by Google's image server and couldn't be downloaded
-  automatically. The Leadership page shows initials-avatar placeholders until
-  real photos are supplied (drop them in `public/team/` and wire them into
-  `src/app/about/leadership/page.tsx`'s `LeaderCard` calls).
 - Zeffy donation embed — no real Zeffy form exists yet; see "Donations" above.
+
+Leadership headshots are real photos, stored in `public/team/` and wired via
+the optional `photo` field on each entry in `PEOPLE` (`src/lib/constants.ts`).
+Anyone without a `photo` set falls back to an initials avatar automatically
+(both `LeaderCard` on the Leadership page and `EmployeeDirectory` handle
+this) — add a photo the same way for any future leader.
 
 ## Known limitation to address before going live
 
