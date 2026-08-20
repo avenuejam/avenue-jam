@@ -65,6 +65,7 @@ export async function createNewsArticle(
   await prisma.newsArticle.create({ data: toNewsData(parsed.data) });
   revalidatePath("/admin/news");
   revalidatePath("/news");
+  revalidatePath("/");
   redirect("/admin/news");
 }
 
@@ -97,6 +98,7 @@ export async function updateNewsArticle(
   revalidatePath("/admin/news");
   revalidatePath("/news");
   revalidatePath(`/news/${parsed.data.slug}`);
+  revalidatePath("/");
   redirect("/admin/news");
 }
 
@@ -105,4 +107,5 @@ export async function deleteNewsArticle(id: string) {
   await prisma.newsArticle.delete({ where: { id } });
   revalidatePath("/admin/news");
   revalidatePath("/news");
+  revalidatePath("/");
 }

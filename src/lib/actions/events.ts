@@ -69,6 +69,7 @@ export async function createEvent(
   await prisma.event.create({ data: toEventData(parsed.data) });
   revalidatePath("/admin/events");
   revalidatePath("/events");
+  revalidatePath("/");
   redirect("/admin/events");
 }
 
@@ -100,6 +101,7 @@ export async function updateEvent(
   await prisma.event.update({ where: { id }, data: toEventData(parsed.data) });
   revalidatePath("/admin/events");
   revalidatePath("/events");
+  revalidatePath("/");
   redirect("/admin/events");
 }
 
@@ -108,4 +110,5 @@ export async function deleteEvent(id: string) {
   await prisma.event.delete({ where: { id } });
   revalidatePath("/admin/events");
   revalidatePath("/events");
+  revalidatePath("/");
 }
