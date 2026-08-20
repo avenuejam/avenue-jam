@@ -43,6 +43,11 @@ const milestones = [
     title: "Chapter network begins",
     body: "AVENUE JAM begins establishing its initial chapter structures across three states and eight major regions.",
   },
+  {
+    date: "August 14, 2026",
+    title: "501(c)(3) status recognized",
+    body: "The IRS recognizes AVENUE JAM CORPORATION as a tax-exempt 501(c)(3) public charity, making donations tax-deductible to the extent allowed by law.",
+  },
 ];
 
 export default function HistoryPage() {

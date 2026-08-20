@@ -116,15 +116,17 @@ export default function OurStoryPage() {
             </p>
           </StoryBlock>
 
-          <StoryBlock title="Building Toward 501(c)(3) Status">
+          <StoryBlock title="Achieving 501(c)(3) Status">
             <p>
               After establishing the corporation, AVENUE JAM&apos;s leadership internally raised
               the funds necessary to pursue federal tax-exempt recognition.
             </p>
             <p>The organization&apos;s 501(c)(3) application was submitted on August 7, 2026.</p>
             <p>
-              This represented another step toward establishing AVENUE JAM as a nationally
-              structured charitable educational organization.
+              The IRS recognized AVENUE JAM CORPORATION as a 501(c)(3) tax-exempt public charity on
+              August 14, 2026 — formally establishing AVENUE JAM as a nationally structured
+              charitable educational organization, and making gifts to AVENUE JAM tax-deductible to
+              the extent allowed by law.
             </p>
           </StoryBlock>
 

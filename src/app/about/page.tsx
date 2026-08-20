@@ -54,7 +54,7 @@ export default function AboutPage() {
               </div>
               <div className="flex justify-between border-b border-brand-100 pb-3">
                 <dt className="text-neutral-600">Tax status</dt>
-                <dd className="font-medium text-brand-900">501(c)(3) pending</dd>
+                <dd className="font-medium text-brand-900">501(c)(3) tax-exempt</dd>
               </div>
               <div className="flex justify-between border-b border-brand-100 pb-3">
                 <dt className="text-neutral-600">Model</dt>
