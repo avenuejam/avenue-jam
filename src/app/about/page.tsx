@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/Section";
 import { Button } from "@/components/Button";
+import { ORG_EIN } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "About AVENUE JAM",
@@ -54,7 +55,11 @@ export default function AboutPage() {
               </div>
               <div className="flex justify-between border-b border-brand-100 pb-3">
                 <dt className="text-neutral-600">Tax status</dt>
-                <dd className="font-medium text-brand-900">501(c)(3) tax-exempt</dd>
+                <dd className="font-medium text-brand-900">Recognized 501(c)(3)</dd>
+              </div>
+              <div className="flex justify-between border-b border-brand-100 pb-3">
+                <dt className="text-neutral-600">EIN</dt>
+                <dd className="font-medium text-brand-900">{ORG_EIN}</dd>
               </div>
               <div className="flex justify-between border-b border-brand-100 pb-3">
                 <dt className="text-neutral-600">Model</dt>

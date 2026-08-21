@@ -7,9 +7,10 @@ export const ORG_MISSION_SECONDARY =
   "Through grassroots, on-the-ground education and in-school curriculum delivery, AVENUE JAM supports informed participation, critical thinking, and youth empowerment, from a completely non-partisan perspective.";
 
 export const ORG_501C3_RECOGNIZED_DATE = "August 14, 2026";
+export const ORG_EIN = "41-4501295";
 
 export const ORG_LEGAL_BLURB =
-  'The AVENUE JAM CORPORATION, D.B.A. "AVENUE JAM" is a 501(c)(3) tax-exempt nonprofit corporation in the State of Delaware, in and for the pursuance of the public knowledge within the context of nonpartisan civics, legal rights, and humanities. Any displayed "partnership" with political candidates, campaigns, or otherwise partisan entities ONLY constitutes commendation for their demonstrated general support of our aforementioned purpose. It does NOT and will never constitute support for election or otherwise partisan endorsement.';
+  'The AVENUE JAM CORPORATION, D.B.A. "AVENUE JAM" is a recognized 501(c)(3) tax-exempt nonprofit corporation in the State of Delaware, in and for the pursuance of the public knowledge within the context of nonpartisan civics, legal rights, and humanities. Any displayed "partnership" with political candidates, campaigns, or otherwise partisan entities ONLY constitutes commendation for their demonstrated general support of our aforementioned purpose. It does NOT and will never constitute support for election or otherwise partisan endorsement.';
 
 export const ORG_CONTACT = {
   email: "hello@avenuejam.com",

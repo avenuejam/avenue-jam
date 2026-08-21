@@ -6,6 +6,7 @@ import {
   FOOTER_ORG_LINKS,
   FOOTER_PROGRAM_LINKS,
   ORG_CONTACT,
+  ORG_EIN,
   ORG_LEGAL_BLURB,
   ORG_LEGAL_NAME,
 } from "@/lib/constants";
@@ -92,6 +93,9 @@ export function Footer() {
       <div className="border-t border-white/10 py-8">
         <Container>
           <p className="max-w-4xl text-xs leading-relaxed text-brand-100/60">{ORG_LEGAL_BLURB}</p>
+          <p className="mt-3 text-xs text-brand-100/60">
+            A recognized 501(c)(3) nonprofit &middot; EIN {ORG_EIN}
+          </p>
           <div className="mt-6 flex flex-col items-center justify-between gap-3 text-xs text-brand-100/70 sm:flex-row">
             <p>
               &copy; {new Date().getFullYear()} {ORG_LEGAL_NAME}. All rights reserved.

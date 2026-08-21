@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/Section";
 import { DonateEmbed } from "@/components/DonateEmbed";
-import { DONATIONS_LIVE, ORG_501C3_RECOGNIZED_DATE } from "@/lib/constants";
+import { DONATIONS_LIVE, ORG_501C3_RECOGNIZED_DATE, ORG_EIN } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Donate",
@@ -20,7 +20,7 @@ const impactTiers = [
 const donationBenefits = [
   {
     title: "Tax-Deductible",
-    body: `AVENUE JAM CORPORATION is a recognized 501(c)(3) public charity (IRS determination ${ORG_501C3_RECOGNIZED_DATE}). Your gift is tax-deductible to the extent allowed by law.`,
+    body: `AVENUE JAM CORPORATION is a recognized 501(c)(3) public charity (IRS determination ${ORG_501C3_RECOGNIZED_DATE}, EIN ${ORG_EIN}). Your gift is tax-deductible to the extent allowed by law.`,
   },
   {
     title: "100% to Programs",
@@ -58,16 +58,18 @@ function DonateComingSoon() {
       <PageHero
         eyebrow="Support Our Mission"
         title="Donate to AVENUE JAM"
-        description="Online giving isn't open yet — we're finalizing our bank account and Zeffy donation platform setup."
+        description={
+          <>
+            Online giving isn&apos;t public <em>just</em> yet.
+          </>
+        }
       />
       <Section>
         <div className="mx-auto max-w-xl text-center">
           <h2 className="text-2xl font-bold text-brand-950">Coming Soon</h2>
           <p className="mt-4 text-lg leading-relaxed text-neutral-600">
             AVENUE JAM is a recognized 501(c)(3) public charity, and gifts will be tax-deductible
-            once online giving opens. We&apos;re finishing setup on our organizational bank account
-            and Zeffy donation platform in the meantime. If you&apos;d like to support AVENUE JAM
-            now, please{" "}
+            once online giving opens. If you&apos;d like to support AVENUE JAM now, please{" "}
             <Link href="/contact" className="font-semibold text-brand-700 hover:underline">
               get in touch
             </Link>
@@ -120,7 +122,8 @@ export default function DonatePage() {
           </div>
           <p className="mt-4 text-center text-xs text-neutral-500">
             AVENUE JAM CORPORATION processes donations securely through Zeffy, a donor-covered
-            platform, so 100% of your gift goes directly to our programs.
+            platform, so 100% of your gift goes directly to our programs. AVENUE JAM is a
+            recognized 501(c)(3) nonprofit, EIN {ORG_EIN} — keep this for your tax records.
           </p>
         </div>
       </Section>
