@@ -4,27 +4,39 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireUserManagementSession } from "@/lib/auth";
+import { requireUserManagementSession, CHAPTER_LEADERSHIP_ROLES } from "@/lib/auth";
 
-const PORTAL_ELIGIBLE_ROLES = [
+const ASSIGNABLE_ROLES = [
   "NATIONAL_ADMINISTRATOR",
   "EXECUTIVE_DIRECTOR",
   "EXECUTIVE_BOARD_MEMBER",
   "COMMUNICATIONS_OFFICER",
   "DIRECTOR_OF_NATIONAL_CENTRAL_OPERATIONS",
+  "CHAPTER_PRESIDENT",
+  "VICE_PRESIDENT",
+  "SECRETARY",
+  "TREASURER",
+  "PROGRAMS_CURRICULUM_OFFICER",
+  "RECRUITMENT_OUTREACH_OFFICER",
 ] as const;
 
-const schema = z.object({
-  name: z.string().trim().min(2, "Please enter a name."),
-  email: z.string().trim().email("Please enter a valid email address."),
-  password: z.string().min(6, "Password must be at least 6 characters."),
-  role: z.enum(PORTAL_ELIGIBLE_ROLES),
-});
+const schema = z
+  .object({
+    name: z.string().trim().min(2, "Please enter a name."),
+    email: z.string().trim().email("Please enter a valid email address."),
+    password: z.string().min(6, "Password must be at least 6 characters."),
+    role: z.enum(ASSIGNABLE_ROLES),
+    chapterId: z.string().trim().optional(),
+  })
+  .refine(
+    (data) => !CHAPTER_LEADERSHIP_ROLES.includes(data.role) || !!data.chapterId,
+    { message: "Please select a chapter for this role.", path: ["chapterId"] },
+  );
 
 export type UserFormState = {
   status: "idle" | "success" | "error";
   message?: string;
-  fieldErrors?: Partial<Record<keyof z.infer<typeof schema>, string>>;
+  fieldErrors?: Partial<Record<"name" | "email" | "password" | "role" | "chapterId", string>>;
 };
 
 export async function createStaffUser(
@@ -37,7 +49,7 @@ export async function createStaffUser(
   if (!parsed.success) {
     const fieldErrors: UserFormState["fieldErrors"] = {};
     for (const issue of parsed.error.issues) {
-      fieldErrors[issue.path[0] as keyof z.infer<typeof schema>] = issue.message;
+      fieldErrors[issue.path[0] as "name" | "email" | "password" | "role" | "chapterId"] = issue.message;
     }
     return { status: "error", message: "Please correct the errors below.", fieldErrors };
   }
@@ -51,6 +63,7 @@ export async function createStaffUser(
     };
   }
 
+  const isChapterRole = CHAPTER_LEADERSHIP_ROLES.includes(parsed.data.role);
   const passwordHash = await bcrypt.hash(parsed.data.password, 12);
   await prisma.user.create({
     data: {
@@ -58,6 +71,7 @@ export async function createStaffUser(
       email: parsed.data.email,
       role: parsed.data.role,
       passwordHash,
+      chapterId: isChapterRole ? parsed.data.chapterId : null,
     },
   });
 

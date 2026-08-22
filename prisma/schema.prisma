@@ -32,17 +32,28 @@ enum EventScope {
   CHAPTER
 }
 
-// The only roles eligible for the national /admin portal. Two more role
-// groups exist in the org (Special Regional Coordinator/State Lead, and
-// chapter leadership: President/VP/Secretary/Treasurer/Programs & Curriculum
-// Officer/Recruitment & Outreach Officer) but don't have a portal of their
-// own yet — see README.md for the planned dashboards.
+// National portal roles (ADMIN_ROLES/CONTENT_ROLES in src/lib/auth.ts), plus
+// chapter-leadership roles that can only log in to the resource library
+// (RESOURCE_LIBRARY_ROLES) — see README.md for the planned regional-
+// leadership dashboard, which still has no roles or portal of its own.
 enum UserRole {
   NATIONAL_ADMINISTRATOR
   EXECUTIVE_DIRECTOR
   EXECUTIVE_BOARD_MEMBER
   COMMUNICATIONS_OFFICER // portal access scoped to content (Chapters/News/Events) only
   DIRECTOR_OF_NATIONAL_CENTRAL_OPERATIONS
+  CHAPTER_PRESIDENT // resource-library access only, scoped to their own chapter
+  VICE_PRESIDENT
+  SECRETARY
+  TREASURER
+  PROGRAMS_CURRICULUM_OFFICER
+  RECRUITMENT_OUTREACH_OFFICER
+}
+
+enum CurriculumUnit {
+  CIVIC_EDUCATION
+  HUMAN_RIGHTS_EDUCATION
+  LEGAL_RIGHTS_LITERACY
 }
 
 model User {
@@ -52,9 +63,24 @@ model User {
   passwordHash         String
   role                 UserRole
   active               Boolean              @default(true)
+  chapterId            String?
+  chapter              Chapter?             @relation(fields: [chapterId], references: [id])
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @updatedAt
   reviewedApplications ChapterApplication[]
+}
+
+model Lesson {
+  id          String         @id @default(cuid())
+  unit        CurriculumUnit
+  title       String
+  slug        String         @unique
+  description String
+  fileUrl     String // Vercel Blob URL — never sent to the client directly
+  fileName    String // original filename, used for the download's Content-Disposition
+  sortOrder   Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 }
 
 model Chapter {
@@ -75,6 +101,7 @@ model Chapter {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   events        Event[]
+  users         User[]
 }
 
 model ChapterApplication {

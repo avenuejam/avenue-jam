@@ -110,6 +110,12 @@ export function Footer() {
               <Link href="#" className="hover:text-white">
                 Terms of Use
               </Link>
+              <Link href="/admin/login" className="hover:text-white">
+                Staff Login
+              </Link>
+              <Link href="/chapter-login" className="hover:text-white">
+                Chapter Login
+              </Link>
             </div>
           </div>
         </Container>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { requireUserManagementSession } from "@/lib/auth";
 import { setStaffUserActive } from "@/lib/actions/users";
+import { getChapters } from "@/lib/data/chapters";
 import { Table } from "@/components/admin/Table";
 import { UserForm } from "@/components/admin/UserForm";
 import { ROLE_LABELS } from "@/lib/roleLabels";
@@ -12,7 +13,10 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminUsersPage() {
   await requireUserManagementSession();
-  const users = await prisma.user.findMany({ orderBy: { createdAt: "desc" } });
+  const [users, chapters] = await Promise.all([
+    prisma.user.findMany({ orderBy: { createdAt: "desc" }, include: { chapter: true } }),
+    getChapters(),
+  ]);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
@@ -28,6 +32,7 @@ export default async function AdminUsersPage() {
             { key: "name", label: "Name" },
             { key: "email", label: "Email" },
             { key: "role", label: "Role" },
+            { key: "chapter", label: "Chapter" },
             { key: "active", label: "Status" },
             { key: "actions", label: "" },
           ]}
@@ -35,6 +40,7 @@ export default async function AdminUsersPage() {
             name: u.name,
             email: u.email,
             role: ROLE_LABELS[u.role] ?? u.role,
+            chapter: u.chapter?.name ?? "—",
             active: u.active ? "Active" : "Deactivated",
             actions: (
               <form action={setStaffUserActive.bind(null, u.id, !u.active)}>
@@ -49,7 +55,7 @@ export default async function AdminUsersPage() {
 
       <h2 className="mt-12 text-lg font-semibold text-neutral-900">Create Staff Account</h2>
       <div className="mt-4">
-        <UserForm />
+        <UserForm chapters={chapters} />
       </div>
     </div>
   );

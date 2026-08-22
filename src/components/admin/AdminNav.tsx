@@ -6,6 +6,7 @@ const CONTENT_LINKS = [
   { href: "/admin/chapters", label: "Chapters" },
   { href: "/admin/news", label: "News" },
   { href: "/admin/events", label: "Events" },
+  { href: "/admin/resources", label: "Resources" },
 ];
 
 const OPERATIONS_LINKS = [

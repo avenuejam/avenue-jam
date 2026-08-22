@@ -14,25 +14,46 @@ export const ADMIN_ROLES: UserRole[] = [
 ];
 
 /**
- * Everyone who can reach the portal at all. COMMUNICATIONS_OFFICER is
- * scoped to creating/editing public-facing content (Chapters, News, Events)
- * only — not applications, submissions, or user management.
+ * Everyone who can reach the national /admin portal. COMMUNICATIONS_OFFICER
+ * is scoped to creating/editing public-facing content (Chapters, News,
+ * Events, Resources) only — not applications, submissions, or user
+ * management.
  */
 export const CONTENT_ROLES: UserRole[] = [...ADMIN_ROLES, "COMMUNICATIONS_OFFICER"];
 
 /** Who can create/deactivate staff accounts. */
 export const USER_MANAGEMENT_ROLES: UserRole[] = ["NATIONAL_ADMINISTRATOR", "EXECUTIVE_DIRECTOR"];
 
-async function requireRole(allowed: UserRole[]) {
+/**
+ * Chapter leadership: no /admin access at all, just the resource library,
+ * scoped to their own chapter (via User.chapterId).
+ */
+export const CHAPTER_LEADERSHIP_ROLES: UserRole[] = [
+  "CHAPTER_PRESIDENT",
+  "VICE_PRESIDENT",
+  "SECRETARY",
+  "TREASURER",
+  "PROGRAMS_CURRICULUM_OFFICER",
+  "RECRUITMENT_OUTREACH_OFFICER",
+];
+
+/** Everyone who can view/download the resource library — national staff and chapter leadership alike. */
+export const RESOURCE_LIBRARY_ROLES: UserRole[] = [...CONTENT_ROLES, ...CHAPTER_LEADERSHIP_ROLES];
+
+async function requireRole(allowed: UserRole[], deniedRedirect = "/admin") {
   const session = await auth();
   if (!session?.user) redirect("/admin/login");
-  if (!allowed.includes(session.user.role)) redirect("/admin");
+  if (!allowed.includes(session.user.role)) redirect(deniedRedirect);
   return session;
 }
 
-/** Layout-level gate: can the user reach the portal at all? */
+/**
+ * Layout-level gate for the national portal. Chapter-leadership roles are
+ * never in CONTENT_ROLES, so they're bounced to /resources instead of
+ * looping back into /admin's own guard.
+ */
 export function requirePortalSession() {
-  return requireRole(CONTENT_ROLES);
+  return requireRole(CONTENT_ROLES, "/resources");
 }
 
 /** Applications review, raw form submissions. */
@@ -43,4 +64,9 @@ export function requireAdminSession() {
 /** Staff account management. */
 export function requireUserManagementSession() {
   return requireRole(USER_MANAGEMENT_ROLES);
+}
+
+/** Resource library: national staff and chapter leadership. */
+export function requireResourceLibrarySession() {
+  return requireRole(RESOURCE_LIBRARY_ROLES, "/admin/login");
 }
