@@ -134,11 +134,13 @@ national portal):
 
 ## Donations
 
-`/donate` renders a placeholder in place of the Zeffy embed
-(`src/components/DonateEmbed.tsx`). Once AVENUE JAM's Zeffy account and
-donation form exist, set `ZEFFY_FORM_URL` in `src/lib/constants.ts` to the
-real embed URL and the live form will render automatically — no other code
-changes needed.
+Live. `ZEFFY_FORM_URL` in `src/lib/constants.ts` points at AVENUE JAM's real
+Zeffy form, which flips `DONATIONS_LIVE` on automatically — every "Donate"
+button/link sitewide, and the real embedded form on `/donate`
+(`src/components/DonateEmbed.tsx`), render for real. The embed uses Zeffy's
+auto-resizing JS widget, with a plain-iframe fallback if that script fails
+to load. To point at a different form, just change `ZEFFY_FORM_URL` —
+nothing else needs to change.
 
 ## What's deferred to the next phase
 
@@ -149,9 +151,9 @@ done. Still not built:
   categories/tags/search)
 - Internal employee & leadership directory (the public `/about/directory`
   page is a simplified, public-safe version of this)
-- Chapter/member self-service portals (login for Chapter Presidents/Officers,
-  Members, Educators/Advisors — these roles exist in `UserRole` but have no
-  `/admin` access or portal of their own yet)
+- Regional and chapter leadership portals (see "Planned dashboards" above —
+  none of those roles exist in `UserRole` yet, since neither portal is
+  built)
 - Public event registration (events have an optional external
   `registerUrl`; no built-in RSVP/ticketing)
 - Reports/analytics in the admin dashboard
@@ -176,7 +178,6 @@ needed.
 Still placeholder/sample:
 - Chapter directory entries, news articles, and events (`prisma/seed.ts`) —
   fictional examples showing the data model works, not real chapters.
-- Zeffy donation embed — no real Zeffy form exists yet; see "Donations" above.
 
 Leadership headshots are real photos, stored in `public/team/` and wired via
 the optional `photo` field on each entry in `PEOPLE` (`src/lib/constants.ts`).
