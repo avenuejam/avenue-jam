@@ -1,12 +1,21 @@
+"use client";
+
+import { useState } from "react";
+import Script from "next/script";
 import { ZEFFY_FORM_URL } from "@/lib/constants";
 
+const ZEFFY_ORIGIN = "https://www.zeffy.com";
+const ZEFFY_FORM_PATH = ZEFFY_FORM_URL.replace(ZEFFY_ORIGIN, "");
+
 /**
- * Placeholder for the Zeffy donation embed. Swap `ZEFFY_FORM_URL` in
- * src/lib/constants.ts for the organization's real Zeffy form URL — the
- * iframe embed code is otherwise exactly what Zeffy provides.
+ * Zeffy's official embed: a target div loaded by Zeffy's own script (which
+ * auto-sizes the iframe to the form's content), with a plain-iframe fallback
+ * if that script fails to load. Swap `ZEFFY_FORM_URL` in
+ * src/lib/constants.ts for a different form — nothing else needs to change.
  */
 export function DonateEmbed({ title = "Support AVENUE JAM" }: { title?: string }) {
   const isConfigured = !ZEFFY_FORM_URL.includes("REPLACE-WITH-ZEFFY-FORM-ID");
+  const [showFallback, setShowFallback] = useState(false);
 
   if (!isConfigured) {
     return (
@@ -27,11 +36,24 @@ export function DonateEmbed({ title = "Support AVENUE JAM" }: { title?: string }
   }
 
   return (
-    <iframe
-      title={title}
-      src={ZEFFY_FORM_URL}
-      className="min-h-[850px] w-full rounded-xl border border-neutral-200"
-      allow="payment"
-    />
+    <div className="w-full">
+      <div data-zeffy-embed="" data-form-url={ZEFFY_FORM_PATH} className="min-h-[450px] w-full" />
+      {showFallback && (
+        <div className="relative h-[450px] w-full overflow-hidden rounded-xl border border-neutral-200">
+          <iframe
+            title={title}
+            src={ZEFFY_FORM_URL}
+            className="absolute inset-0 h-full w-full border-0"
+            allow="payment"
+            allowTransparency
+          />
+        </div>
+      )}
+      <Script
+        src="https://www.zeffy.com/embed/v2/zeffy-embed.js"
+        strategy="afterInteractive"
+        onError={() => setShowFallback(true)}
+      />
+    </div>
   );
 }

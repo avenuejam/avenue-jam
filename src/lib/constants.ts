@@ -19,7 +19,7 @@ export const ORG_CONTACT = {
     "https://docs.google.com/forms/d/e/1FAIpQLSce0QLOVmqbE9Q5D3YrFDoiGB6L8UJv_2iFdSM9eFZHXR64Gw/viewform",
 };
 
-export const ZEFFY_FORM_URL = "https://www.zeffy.com/embed/donation-form/REPLACE-WITH-ZEFFY-FORM-ID";
+export const ZEFFY_FORM_URL = "https://www.zeffy.com/embed/donation-form/avenue-jam";
 
 // Flips on automatically once ZEFFY_FORM_URL above is set to a real Zeffy
 // form URL. Until then, the /donate page shows a "coming soon" message and

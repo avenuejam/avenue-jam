@@ -53,7 +53,7 @@ export default async function HomePage() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               {DONATIONS_LIVE && (
-                <Button href="/donate" variant="onDarkOutline" size="lg">
+                <Button href="/donate" variant="onDark" size="lg">
                   Donate
                 </Button>
               )}
